@@ -1,0 +1,91 @@
+[
+    {
+        "name": "区位布局",
+        "name_en": "REGION",
+        "scene":"none",
+        "src": "none",
+        "icon":"icon-quyu",
+        "menu": [
+            {
+                "name": "视频",
+                "name_en": "LOCATION",
+                "scene":"none",
+                "src": "page/jiaotong.html"
+            },
+            {
+                "name": "交通",
+                "name_en": "TRANSIT",
+                "scene":"scene_jiaotong",
+                "src": "none"
+            },
+            {
+                "name": "配套",
+                "name_en": "AMENITIES",
+                "scene":"scene_peitao",
+                "src": "none"
+            },
+            {
+                "name": "主干道",
+                "name_en": "MAINROAD",
+                "scene":"scene_mainroad",
+                "src": "none"
+            }
+        ]
+    },
+    {
+        "name": "项目沙盘",
+        "name_en": "PROJECT",
+        "scene":"scene_fushi",
+        "src": "none",
+        "icon":"icon-shapan"
+    },
+    {
+        "name": "室外漫游",
+        "name_en": "OUTDOOR",
+        "scene":"none",
+        "src": "none",
+        "icon":"icon-yuanlin",
+        "menu": [
+            {
+                "name": "园林",
+                "name_en": "EMERALD",
+                "scene":"scene_EMERALD-1",
+                "src": "none"
+            },
+            {
+                "name": "商街",
+                "name_en": "RETAIL",
+                "scene":"scene_RETAIL-1",
+                "src": "none"
+            }
+        ]
+    },
+    {
+        "name": "品牌展示",
+        "name_en": "GALLERY",
+        "scene":"none",
+        "src": "none",
+        "icon":"icon-gallary",
+        "menu": [
+            {
+                "name": "项目信息",
+                "name_en": "BROCHURE",
+                "src":"page/loushu.html",
+                "scene": "none"
+            },
+            {
+                "name": "画册",
+                "name_en": "CGI",
+                "src":"page/loushu-gallery.html",
+                "scene": "none"
+            },
+            {
+                "name": "视频",
+                "name_en": "VIDEO",
+                "src":"page/loushu-video.html",
+                "scene": "none"
+            }
+        ]
+    }
+]
+

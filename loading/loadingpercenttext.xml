@@ -1,0 +1,78 @@
+﻿<!--
+	show the loading progress as percent text
+	- just include once this xml
+-->
+<krpano>
+	<!--  loading percent text  -->
+	<!--  loading percent events  -->
+	<events name="loadingpercent" keep="true" onxmlcomplete="loadingpercent_startloading();"
+			onloadcomplete="delayedcall(1.75, loadingpercent_stoploading() );"/>
+	<!--  loading percent graphics/text  -->
+	<layer name="loadingpercent_text"
+		   preload="true"
+		   alpha="1"
+		   keep="true"
+		   url="%SWFPATH%/plugins/textfield.swf"
+		   align="bottom"
+		   background="false"
+		   border="false"
+		   autoheight="true"
+		   css="text-align:center; color:#fff; font-family:Arial; font-weight:200; font-size:22px;"
+		   textshadow="0"
+		   html=""
+		   zorder="99"
+		   y="120"/>
+	<layer name="loadingpercent_text_left"
+		   preload="true"
+		   alpha="1"
+		   keep="true"
+		   url="%SWFPATH%/plugins/textfield.swf"
+		   align="bottom"
+		   background="false"
+		   border="false"
+		   autoheight="true"
+		   css="width:70px;height:1px;background:#fff;"
+		   textshadow="0"
+		   html=""
+		   zorder="99"
+		   y="131"
+		   x="-70"/>
+	<layer name="loadingpercent_text_right"
+		   preload="true"
+		   alpha="1"
+		   keep="true"
+		   url="%SWFPATH%/plugins/textfield.swf"
+		   align="bottom"
+		   background="false"
+		   border="false"
+		   autoheight="true"
+		   css="width:70px;height:1px;background:#fff;"
+		   textshadow="0"
+		   html=""
+		   zorder="99"
+		   y="131"
+		   x="70"/>
+	<!--  loading percent actions  -->
+	<action name="loadingpercent_startloading">
+		ifnot(done, set(loadingpercent_isloading, true);
+		set(layer[loadingpercent_text].visible, true);
+		set(layer[loadingpercent_text_left].visible, true);
+		set(layer[loadingpercent_text_right].visible, true);
+		asyncloop(loadingpercent_isloading, mul(pv,
+		progress.progress, 100); roundval(pv,0);
+		txtadd(layer[loadingpercent_text].html, ,' ', get(pv), '%',' '); ); );
+	</action>
+	<action name="loadingpercent_stoploading">
+		set(loadingpercent_isloading, false);
+		<!--set(layer[loadingpercent_text].visible, false);-->
+		<!--set(layer[loadingpercent_text_left].visible, false);-->
+		<!--set(layer[loadingpercent_text_right].visible, false);-->
+
+		delayedcall(.5,tween(layer[loadingpercent_text].alpha,0,2,easeOutQuint));
+		delayedcall(.5,tween(layer[loadingpercent_text_left].alpha,0,2,easeOutQuint));
+		delayedcall(.5,tween(layer[loadingpercent_text_right].alpha,0,2,easeOutQuint));
+		set(done,true);
+
+		<!--js(endLoading());-->
+	</action>
+</krpano>

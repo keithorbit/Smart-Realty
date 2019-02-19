@@ -1,0 +1,226 @@
+﻿<krpano version="1.19" title="Virtual Tour">
+
+	<include url="%SWFPATH%/skin/vtourskin.xml" />
+	<!--<include url="%SWFPATH%/loading/loadingpercenttext.xml" />-->
+
+	<skin_settings maps="false"
+			maps_type="google"
+			maps_bing_api_key=""
+			maps_google_api_key=""
+			maps_zoombuttons="false"
+			gyro="false"
+			webvr="true"
+			webvr_gyro_keeplookingdirection="false"
+			webvr_prev_next_hotspots="false"
+			littleplanetintro="false"
+			title="true"
+			thumbs="true"
+			thumbs_width="120" thumbs_height="80" thumbs_padding="5" thumbs_crop="0|40|240|160"
+			thumbs_opened="false"
+			thumbs_text="true"
+			thumbs_dragging="true"
+			thumbs_onhoverscrolling="false"
+			thumbs_scrollbuttons="false"
+			thumbs_scrollindicator="false"
+			thumbs_loop="false"
+			tooltips_buttons="false"
+			tooltips_thumbs="false"
+			tooltips_hotspots="false"
+			tooltips_mapspots="false"
+			deeplinking="false"
+			loadscene_flags="MERGE"
+			loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+			loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+			loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+			loadingtext="loading..."
+			layout_width="100%"
+			layout_maxwidth="814"
+			controlbar_width="-24"
+			controlbar_height="40"
+			controlbar_offset="20"
+			controlbar_offset_closed="-40"
+			controlbar_overlap.no-fractionalscaling="10"
+			controlbar_overlap.fractionalscaling="0"
+			design_skin_images="vtourskin.png"
+			design_bgcolor="0x2D3E50"
+			design_bgalpha="0.8"
+			design_bgborder="0"
+			design_bgroundedge="1"
+			design_bgshadow="0 4 10 0x000000 0.3"
+			design_thumbborder_bgborder="1 0xFFFFFF 1.0"
+			design_thumbborder_padding="0"
+			design_thumbborder_bgroundedge="0"
+			design_text_css="color:#FFFFFF; font-family:Arial;"
+			design_text_shadow="0"
+	/>
+
+	<action name="startup" autorun="onstart">
+		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+		loadscene(get(scene[get(startscene)].name), null, MERGE);
+		if(startactions !== null, startactions() );
+	</action>
+
+
+	<scene name="scene_keting_diban" title="LIVING ROOM" onstart="set(layer[compass_pointer].x,0); set(layer[compass_pointer].y,0);" havevrimage="true" thumburl="panos/type8/keting1.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/type8/keting1.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/type8/keting1.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="1024" tiledimageheight="1024">
+				<cube url="panos/type8/keting1.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+
+		<image if="webvr.isenabled">
+			<cube url="panos/type8/keting1.tiles/vr/pano_%s.jpg" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="104.681" atv="1.660" linkedscene="scene_woshi_diban" />
+		<hotspot name="spot2" style="skin_hotspotstyle" ath="-143.663" atv="5.634" linkedscene="scene_woshi3_diban" />
+
+	</scene>
+
+	<scene name="scene_keting_ditan" title="LIVING ROOM" onstart="set(layer[compass_pointer].x,0); set(layer[compass_pointer].y,0);" havevrimage="true" thumburl="panos/type8/keting2.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/type8/keting2.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/type8/keting2.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="1024" tiledimageheight="1024">
+				<cube url="panos/type8/keting2.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+
+		<image if="webvr.isenabled">
+			<cube url="panos/type8/keting2.tiles/vr/pano_%s.jpg" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_woshi_diban" title="BEDROOM" onstart="set(layer[compass_pointer].x,-180); set(layer[compass_pointer].y,15);" havevrimage="true" thumburl="panos/type8/woshi1.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/type8/woshi1.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/type8/woshi1.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="1024" tiledimageheight="1024">
+				<cube url="panos/type8/woshi1.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+
+		<image if="webvr.isenabled">
+			<cube url="panos/type8/woshi1.tiles/vr/pano_%s.jpg" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="84.122" atv="10.990" linkedscene="scene_weishengjian" />
+		<hotspot name="spot2" style="skin_hotspotstyle" ath="143.159" atv="9.140" linkedscene="scene_keting_diban" />
+
+	</scene>
+
+	<scene name="scene_woshi_ditan" title="BEDROOM" onstart="set(layer[compass_pointer].x,-180); set(layer[compass_pointer].y,15);" havevrimage="true" thumburl="panos/type8/woshi2.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/type8/woshi2.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/type8/woshi2.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="1024" tiledimageheight="1024">
+				<cube url="panos/type8/woshi2.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+
+		<image if="webvr.isenabled">
+			<cube url="panos/type8/woshi2.tiles/vr/pano_%s.jpg" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_woshi3_diban" title="BEDROOM 2" onstart="set(layer[compass_pointer].x,140); set(layer[compass_pointer].y,41);" havevrimage="true" thumburl="panos/type23/woshi3.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/type23/woshi3.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+			<level tiledimagewidth="1600" tiledimageheight="1600">
+				<cube url="panos/type23/woshi3.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/type23/woshi3.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+
+		<image if="webvr.isenabled">
+			<cube url="panos/type23/woshi3.tiles/vr/pano_%s.jpg" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="-107.635" atv="1.744" linkedscene="scene_keting_diban" />
+
+	</scene>
+
+	<scene name="scene_woshi3_ditan" title="BEDROOM 2" onstart="set(layer[compass_pointer].x,140); set(layer[compass_pointer].y,41);" havevrimage="true" thumburl="panos/type23/woshi4.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/type23/woshi4.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+			<level tiledimagewidth="1600" tiledimageheight="1600">
+				<cube url="panos/type23/woshi4.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="768" tiledimageheight="768">
+				<cube url="panos/type23/woshi4.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+
+		<image if="webvr.isenabled">
+			<cube url="panos/type23/woshi4.tiles/vr/pano_%s.jpg" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_weishengjian" title="TOILET" onstart="set(layer[compass_pointer].x,-190); set(layer[compass_pointer].y,165);" havevrimage="true" thumburl="panos/type8/weishengjian.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="156.218" vlookat="-0.074" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/type8/weishengjian.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+			<level tiledimagewidth="1792" tiledimageheight="1792">
+				<cube url="panos/type8/weishengjian.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="1024" tiledimageheight="1024">
+				<cube url="panos/type8/weishengjian.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+
+		<image if="webvr.isenabled">
+			<cube url="panos/type8/weishengjian.tiles/vr/pano_%s.jpg" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="-2.185" atv="11.823" linkedscene="scene_woshi_diban" />
+
+	</scene>
+
+
+	<layer name="compass" visible="true" url="%SWFPATH%/images/compass_plate_type8.jpg" keep="true" handcursor="false" capture="false" align="lefttop" x="10" y="10" children="true" scalechildren="true" scale="0.22" onclick="openmap();">
+		<layer name="compass_spots_1" url="%SWFPATH%/images/compass_spots.png" keep="true" align="center" scale="1" x="0" y="15" zorder="20" onclick="mapspot_loadscene(scene_keting_diban)); "/>
+		<layer name="compass_spots_2" url="%SWFPATH%/images/compass_spots.png" keep="true" align="center" scale="1" x="-180" y="30"   zorder="20" onclick="mapspot_loadscene(scene_woshi_diban)); "/>
+		<layer name="compass_spots_3" url="%SWFPATH%/images/compass_spots.png" keep="true" align="center" scale="1" x="140" y="56"   zorder="20" onclick="mapspot_loadscene(scene_woshi3_diban)); "/>
+		<layer name="compass_spots_4" url="%SWFPATH%/images/compass_spots.png" keep="true" align="center" scale="1" x="-190" y="180"   zorder="20" onclick="mapspot_loadscene(scene_weishengjian); "/>
+		<layer name="compass_pointer" url="%SWFPATH%/images/hot-icon/new_spotd6_gif2.png" keep="true" align="center" x="0" y="0" global_heading="0" zorder="200" onloaded="do_crop_animation(128,128, 50);" scale="1" />
+	</layer>
+
+</krpano>

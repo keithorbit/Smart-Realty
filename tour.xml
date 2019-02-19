@@ -1,0 +1,945 @@
+﻿<krpano version="1.19" title="Virtual Tour">
+
+    <include url="%SWFPATH%/skin/vtourskin.xml" />
+    <include url="%SWFPATH%/loading/loadingpercenttext.xml" />
+
+    <skin_settings maps="false"
+            maps_type="google"
+            maps_bing_api_key=""
+            maps_google_api_key=""
+            maps_zoombuttons="false"
+            gyro="false"
+            webvr="true"
+            webvr_gyro_keeplookingdirection="false"
+            webvr_prev_next_hotspots="false"
+            littleplanetintro="true"
+            title="true"
+            thumbs="false"
+            thumbs_width="120" thumbs_height="80" thumbs_padding="10" thumbs_crop="0|40|240|160"
+            thumbs_opened="false"
+            thumbs_text="false"
+            thumbs_dragging="true"
+            thumbs_onhoverscrolling="false"
+            thumbs_scrollbuttons="false"
+            thumbs_scrollindicator="false"
+            thumbs_loop="false"
+            tooltips_buttons="false"
+            tooltips_thumbs="false"
+            tooltips_hotspots="false"
+            tooltips_mapspots="false"
+            deeplinking="false"
+            loadscene_flags="MERGE"
+            loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+            loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+            loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+            loadingtext="loading..."
+            layout_width="100%"
+            layout_maxwidth="814"
+            controlbar_width="-24"
+            controlbar_height="40"
+            controlbar_offset="20"
+            controlbar_offset_closed="-40"
+            controlbar_overlap.no-fractionalscaling="10"
+            controlbar_overlap.fractionalscaling="0"
+            design_skin_images="vtourskin.png"
+            design_bgcolor="0x2D3E50"
+            design_bgalpha="0.8"
+            design_bgborder="0"
+            design_bgroundedge="1"
+            design_bgshadow="0 4 10 0x000000 0.3"
+            design_thumbborder_bgborder="3 0xFFFFFF 1.0"
+            design_thumbborder_padding="2"
+            design_thumbborder_bgroundedge="0"
+            design_text_css="color:#FFFFFF; font-family:Arial;"
+            design_text_shadow="1"
+    />
+
+    <action name="startup" autorun="onstart">
+        if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+        loadscene(get(startscene), null, MERGE);
+        if(startactions !== null, startactions() );
+
+        delayedcall(8, set(layer[intro_shell].visible,true));
+    </action>
+    <!--  启动画面开始  -->
+    <layer name="intro_jpg"
+            url.normal="%SWFPATH%/images/show-bg-pc.jpg"
+            url.mobile="%SWFPATH%/images/show-bg.jpg"
+            preload="true"
+            handcursor="false"
+            enabled="true"
+            children="true"
+            visible=""
+            zorder="90"
+            maskchildren="true"
+            keep="true"
+            align="center"
+            width="100%"
+            height="100%"
+    >
+        <layer name="skin_title_logo"
+                zorder="100"
+                keep="true"
+                enabled="false"
+                visible="true"
+                x="0"
+                y="-70"
+                alpha="1"
+                align="center"
+                url="%SWFPATH%/images/logo.png"
+                crop=""
+                scale.normal=".70"
+                scale.mobile=".70"
+        />
+    </layer>
+    <events name="startlogoevents" keep="true"
+            onloadcomplete="delayedcall(2,tween(layer[intro_jpg].alpha,0,2,easeOutQuint));delayedcall(5,tween(layer[intro_jpg].ox,-2500,2));tweenintrobuttonalpha(1);"
+            onresize="if(stagewidth GT stageheight,
+       set(layer[intro_jpg].url,%SWFPATH%/images/show-bg-pc.jpg),
+       set(layer[intro_jpg].url,%SWFPATH%/images/show-bg.jpg)
+      );"
+    />
+    <!-- 启动画面结束 -->
+
+    <scene name="scene_CBD" title="CBD" onstart="hide_layer_ctrl2();" havevrimage="true" thumburl="panos/CBD.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="13.15" vlookat="20" fovtype="MFOV" fov="110" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/CBD.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/CBD.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/CBD.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/CBD.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/CBD.tiles/vr/pano_%s.jpg" />
+        </image>
+
+        <hotspot name="logo" style="skin_logo_icon" ath="2.865" atv="15.156" scale=".15" zoom="true" url="%SWFPATH%/images/logo2.png" enabled="false" />
+
+        <hotspot name="hotspot-cbd-1" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-178.290" atv="0.955" html="Rhodes" distorted="false" zoom="true" visible="true" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-cbd-1]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-cbd-2" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-166.710" atv="0.810" html="Sydney Olympic Park" distorted="false" zoom="true" visible="true" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-cbd-2]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-cbd-3" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-122.587" atv="-0.589" html="Parramatta CBD" distorted="false" zoom="true" visible="true" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-cbd-3]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-cbd-4" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-4.141" atv="0.646" html="Macquarie Park CBD" distorted="false" zoom="true" visible="true" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-cbd-4]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-cbd-5" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="31.925" atv="-0.066" html="Chatswood CBD" distorted="false" zoom="true" visible="true" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-cbd-5]" style="skin_icon_marks2" />
+
+    </scene>
+
+    <scene name="scene_jiaotong" title="jiaotong" onstart="hide_layer_ctrl2();" havevrimage="true" thumburl="panos/jiaotong.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="8.29" vlookat="24.47" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/jiaotong.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/jiaotong.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/jiaotong.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/jiaotong.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/jiaotong.tiles/vr/pano_%s.jpg" />
+        </image>
+
+        <hotspot name="logo" style="skin_logo_icon" ath="-13.566" atv="56.994" scale=".14" zoom="true" url="%SWFPATH%/images/logo2.png" enabled="false" />
+        
+        <hotspot name="hotspot-daolu-1" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="39.457" atv="71.110" html="Victoria Rd (A40)" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_daolu" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-daolu-1]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-daolu-2" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="24.445" atv="48.672" html="Devli St (A3)" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_daolu" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-daolu-2]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-daolu-3" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-6.768" atv="49.834" html="Belmore St" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_daolu" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-daolu-3]" style="skin_icon_marks2" />
+
+        <hotspot name="hotspot-airplane-1" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="171.645" atv="-1.612" html="Sydney Ariport" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_airplane" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-airplane-1]" style="skin_icon_marks2" />
+
+        <hotspot name="hotspot-bus-1" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="40.545" atv="38.274" html="Police Station" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_bus" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-bus-1]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-bus-2" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-45.232" atv="50.682" html="Victoria Rd at Belmore St" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_bus" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-bus-2]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-bus-3" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="30.361" atv="56.594" html="Church St opp St Anne" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_bus" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-bus-3]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-bus-4" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-47.636" atv="43.711" html="Shopping Centre" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_bus" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-bus-4]" style="skin_icon_marks2" />
+
+        <hotspot name="hotspot-train-1" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-69.047" atv="14.103" html="Meadowbank Station" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_train" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-train-1]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-train-2" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-37.365" atv="11.149" html="West Ryde Station" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_train" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-train-2]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-train-3" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-83.278" atv="14.510" html="Meadowbank Wharf" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_train" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-train-3]" style="skin_icon_marks2" />
+
+        <!--热点标签切换 -->
+        <layer layer_lang="cn" layer_tips="show_this" name="btn_daolu" style="layer_ctrl" html="道路" y="230" onclick="toggle_hotspots(daolu,daolu, 16.46, 52.12, 100);" />
+        <layer layer_lang="cn" layer_tips="show_this" name="btn_airplane" style="layer_ctrl" html="机场" y="180" onclick="toggle_hotspots(airplane,airplane, 180.56, 21, 100);" />
+        <layer layer_lang="cn" layer_tips="show_this" name="btn_bus" style="layer_ctrl" html="汽车站" y="130" onclick="toggle_hotspots(bus,bus, 38.42, 33, 100);" />
+        <layer layer_lang="cn" layer_tips="show_this" name="btn_train" style="layer_ctrl" html="火车站" y="80" onclick="toggle_hotspots(train,train, -64.79, 25, 100);" />
+
+        <layer layer_lang="en" layer_tips="show_this" width="80" name="en_btn_daolu" style="layer_ctrl" html="MAIN ROADS" y="230" onclick="toggle_hotspots(daolu,daolu, 16.46, 52.12, 100);" />
+        <layer layer_lang="en" layer_tips="show_this" width="80" name="en_btn_airplane" style="layer_ctrl" html="AIRPORT" y="180" onclick="toggle_hotspots(airplane,airplane, 180.56, 21, 100);" />
+        <layer layer_lang="en" layer_tips="show_this" width="80" name="en_btn_bus" style="layer_ctrl" html="BUS STOPS" y="130" onclick="toggle_hotspots(bus,bus, 38.42, 33, 100);" />
+        <layer layer_lang="en" layer_tips="show_this" width="80" name="en_btn_train" style="layer_ctrl" html="TRAIN STATION" y="80" onclick="toggle_hotspots(train,train, -64.79, 25, 100);" />
+
+    </scene>
+
+    <scene name="scene_peitao" title="peitao" onstart="hide_layer_ctrl2();" havevrimage="true" thumburl="panos/peitao.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/peitao.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/peitao.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/peitao.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/peitao.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/peitao.tiles/vr/pano_%s.jpg" />
+        </image>
+
+        <hotspot name="logo" style="skin_logo_icon" ath="-2.129" atv="15.542" scale=".16" zoom="true" url="%SWFPATH%/images/logo2.png" enabled="false" />
+
+        <hotspot name="hotspot-suburb-1" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="139.036" atv="-2.611" html="Sydney CBD" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_suburb" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-suburb-1]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-suburb-2" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-55.707" atv="-0.269" html="Parramatta" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_suburb" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-suburb-2]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-suburb-5" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-113.722" atv="-1.501" html="Rhodes" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_suburb" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-suburb-5]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-suburb-6" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-99.993" atv="0.126" html="Sydney Olympic Park" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_suburb" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-suburb-6]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-suburb-7" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-21.231" atv="-1.147" html="Eastwood" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_suburb" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-suburb-7]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-suburb-8" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-3.739" atv="-0.058" html="Epping" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_suburb" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-suburb-8]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-suburb-9" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-7.792" atv="4.836" html="Putney" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_suburb" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-suburb-9]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-suburb-10" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-95.299" atv="4.374" html="Meadowbank" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_suburb" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-suburb-10]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-suburb-11" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="143.158" atv="5.701" html="Gladesville" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_suburb" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-suburb-11]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-suburb-12" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-131.009" atv="0.446" html="Concord" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_suburb" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-suburb-12]" style="skin_icon_marks2" />
+
+        <hotspot name="hotspot-landmark-1" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="31.589" atv="6.206" html="Top Ryde City Shooping Centre" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_landmark" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-landmark-1]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-landmark-2" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-96.916" atv="7.010" html="Ryde Bridge" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_landmark" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-landmark-2]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-landmark-3" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-65.601" atv="7.794" html="Meadowbank Wharf" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_landmark" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-landmark-3]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-landmark-4" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-147.531" atv="11.977" html="Kissing Point Wharf" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_landmark" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-landmark-4]" style="skin_icon_marks2" />
+
+        <hotspot name="hotspot-shopping-1" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="30.077" atv="7.943" html="Top Ryde City Shooping Centre" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_shopping" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-shopping-1]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-shopping-2" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-114.247" atv="0.898" html="Rhodes Waterside Shopping Centre" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_shopping" visible="false" url="%SWFPATH%/plugins/textfield.swf" zorder="20"/>
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-shopping-2]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-shopping-3" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="42.725" atv="-1.884" html="Macquarie Centre" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_shopping" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-shopping-3]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-shopping-4" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-104.963" atv="-1.967" html="DFO Homebush" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_shopping" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-shopping-4]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-shopping-5" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-20.305" atv="-0.373" html="Eastwood Shopping Centre" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_shopping" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-shopping-5]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-shopping-6" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="49.864" atv="2.132" html="Coxs Road Mall" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_shopping" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-shopping-6]" style="skin_icon_marks2" />
+
+
+        <hotspot name="hotspot-entertainment-1" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="77.161" atv="5.847" html="Ryde Park" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_entertainment" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-entertainment-1]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-entertainment-2" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-168.520" atv="2.071" html="Putney Park" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_entertainment" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-entertainment-2]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-entertainment-3" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-145.675" atv="6.963" html="Concord Ryde Sailing Club" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_entertainment" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-entertainment-3]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-entertainment-5" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-135.893" atv="32.487" html="Fitness Ryde Platinum" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_entertainment" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-entertainment-5]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-entertainment-7" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="56.476" atv="9.697" html="F45 Ryde " distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_entertainment" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-entertainment-7]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-entertainment-8" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="72.935" atv="-18.563" html="Monash Park" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_entertainment" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-entertainment-8]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-entertainment-9" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-117.216" atv="0.446" html="Bicentennial Park" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_entertainment" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-entertainment-9]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-entertainment-10" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-36.615" atv="10.184" html="Cascades Playground" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_entertainment" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-entertainment-10]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-entertainment-11" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="49.602" atv="2.238" html="North Ryde Golf Club" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_entertainment" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-entertainment-11]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-entertainment-12" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-86.506" atv="-2.423" html="Blaxland Riverside Park" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_entertainment" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-entertainment-12]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-entertainment-13" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-78.953" atv="0.880" html="Newington Armory" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_entertainment" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-entertainment-13]" style="skin_icon_marks2" />
+
+        <hotspot name="hotspot-education-1" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="49.248" atv="-1.657" html="Northcross Christian School" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_education" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-education-1]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-education-2" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="71.873" atv="-1.554" html="Ryde Public School" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_education" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-education-2]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-education-3" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="73.736" atv="5.659" html="Ryde Secondary College" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_education" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-education-3]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-education-4" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="101.237" atv="8.385" html="Holy Cross College Ryde" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_education" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-education-4]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-education-5" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-46.110" atv="4.483" html="Tafe NSW Meadowbank Campus" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_education" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-education-5]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-education-6" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-58.290" atv="1.493" html="Western Sydney University" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_education" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-education-6]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-education-7" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="111.480" atv="2.026" html="Marist Sisters College Woolwich" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_education" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-education-7]" style="skin_icon_marks2" />
+
+        <hotspot name="hotspot-hospital-1" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-14.340" atv="1.676" html="​​​Ryde Hospital" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_hospital" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-hospital-1]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-hospital-2" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-132.004" atv="0.487" html="Concord Repatriation General Hospital" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_hospital" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-hospital-2]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-hospital-3" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="67.763" atv="1.628" html="Macquarie Hospital" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_hospital" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-hospital-3]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-hospital-4" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="37.504" atv="-0.608" html="Macquarie University Hospital" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_hospital" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-hospital-4]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-hospital-6" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="37.420" atv="6.468" html="Myhealth Medical Rhodes" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_hospital" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-hospital-6]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-hospital-7" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-60.035" atv="6.122" html="Myhealth Medical Meadowbank" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_hospital" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-hospital-7]" style="skin_icon_marks2" />
+        <hotspot name="hotspot-hospital-8" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-26.071" atv="-1.205" html="Rowe Street Medical Centre" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_hospital" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-hospital-8]" style="skin_icon_marks2" css="calc:skin_icon_marks2.css + 'border-top-width:24px;'"/>
+        <hotspot name="hotspot-hospital-9" type="text" style="skin_logo_icon || skin_logo_icon_css2" ath="-110.965" atv="1.391" html="Medical Rhodes" distorted="false" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_hospital" visible="false" url="%SWFPATH%/plugins/textfield.swf" />
+        <layer align="centertop" x="0" y="20" url="%SWFPATH%/plugins/textfield.swf" parent="hotspot[hotspot-hospital-9]" style="skin_icon_marks2" />
+
+
+        <!--热点标签切换 -->
+        <layer layer_lang="cn" layer_tips="show_this" name="btn_suburb" style="layer_ctrl" html="[span]郊区[/span]" y="330" onclick="toggle_hotspots(suburb,suburb, -9.19, 15, 100);" />
+        <layer layer_lang="cn" layer_tips="show_this" name="btn_landmark" style="layer_ctrl" html="地标" y="280" onclick="toggle_hotspots(landmark,landmark, 42.50, 20, 100);" />
+        <layer layer_lang="cn" layer_tips="show_this" name="btn_shopping" style="layer_ctrl" html="购物" y="230" onclick="toggle_hotspots(shopping,shopping, 38.81, 18, 100);" />
+        <layer layer_lang="cn" layer_tips="show_this" name="btn_entertainment" style="layer_ctrl" html="娱乐" y="180" onclick="toggle_hotspots(entertainment,entertainment, -97.77, 18, 100);" />
+        <layer layer_lang="cn" layer_tips="show_this" name="btn_education" style="layer_ctrl" html="教育" y="130" onclick="toggle_hotspots(education,education, -48.28, 18, 100);" />
+        <layer layer_lang="cn" layer_tips="show_this" name="btn_hospital" style="layer_ctrl" html="医院" y="80" onclick="toggle_hotspots(hospital,hospital, 50.06, 18.77, 100);" />
+
+        <layer layer_lang="en" layer_tips="show_this" width="80" name="en_btn_suburb" style="layer_ctrl" html="SUBURBS" y="330" onclick="toggle_hotspots(suburb,suburb, -9.19, 15, 100);" />
+        <layer layer_lang="en" layer_tips="show_this" width="80" name="en_btn_landmark" style="layer_ctrl" html="LANDMARKS" y="280" onclick="toggle_hotspots(landmark,landmark, 42.50, 20, 100);" />
+        <layer layer_lang="en" layer_tips="show_this" width="80" name="en_btn_shopping" style="layer_ctrl" html="SHOPPING" y="230" onclick="toggle_hotspots(shopping,shopping, 38.81, 18, 100);" />
+        <layer layer_lang="en" layer_tips="show_this" width="80" name="en_btn_entertainment" style="layer_ctrl" html="RECREATION" y="180" onclick="toggle_hotspots(entertainment,entertainment, -97.77, 18, 100);" />
+        <layer layer_lang="en" layer_tips="show_this" width="80" name="en_btn_education" style="layer_ctrl" html="RECREATION" y="130" onclick="toggle_hotspots(education,education, -48.28, 18, 100);" />
+        <layer layer_lang="en" layer_tips="show_this" width="80" name="en_btn_hospital" style="layer_ctrl" html="HOSPITAL" y="80" onclick="toggle_hotspots(hospital,hospital, 50.06, 18.77, 100);" />
+
+    </scene>
+
+    <!--中英文label button-->
+    <action name="peitao_layer_cn">
+        for(set(i,0),i LT layer.count,inc(i),
+            if(layer[get(i)].layer_lang == "cn",
+                set(layer[get(i)].visible,true);
+            );
+        );
+        for(set(i,0),i LT layer.count,inc(i),
+            if(layer[get(i)].layer_lang == "en",
+                set(layer[get(i)].visible,false);
+            );
+        );
+    </action>
+    <action name="peitao_layer_en">
+        for(set(i,0),i LT layer.count,inc(i),
+            if(layer[get(i)].layer_lang == "en",
+                set(layer[get(i)].visible,true);
+            );
+        );
+        for(set(i,0),i LT layer.count,inc(i),
+            if(layer[get(i)].layer_lang == "cn",
+                set(layer[get(i)].visible,false);
+            );
+        );
+    </action>
+
+    <action name="jiaotong_layer_cn">
+        for(set(i,0),i LT layer.count,inc(i),
+            if(layer[get(i)].layer_lang == "cn",
+                set(layer[get(i)].visible,true);
+            );
+        );
+        for(set(i,0),i LT layer.count,inc(i),
+            if(layer[get(i)].layer_lang == "en",
+                set(layer[get(i)].visible,false);
+            );
+        );
+    </action>
+    <action name="jiaotong_layer_en">
+        for(set(i,0),i LT layer.count,inc(i),
+            if(layer[get(i)].layer_lang == "en",
+            set(layer[get(i)].visible,true);
+            );
+        );
+        for(set(i,0),i LT layer.count,inc(i),
+            if(layer[get(i)].layer_lang == "cn",
+                set(layer[get(i)].visible,false);
+            );
+        );
+    </action>
+
+
+    <scene name="scene_shapan" title="shapan" onstart="hide_layer_ctrl2();" havevrimage="true" thumburl="panos/shapan.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="-3.250" vlookat="8.927" fovtype="MFOV" fov="120.095" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan.tiles/vr/pano_%s.jpg" />
+        </image>
+        
+  <hotspot name="spot1" style="new_spotd6" ath="-10.636" atv="19.740" linkedscene="scene_fushi_22"  />
+  <hotspot name="spot2" style="new_spotd6" ath="-36.223" atv="31.658" linkedscene="scene_left_22" />
+  <hotspot name="spot3" style="new_spotd6" ath="22.133" atv="27.597" linkedscene="scene_right_22" />
+  <hotspot name="spot4" style="new_spotd6" ath="-11.879" atv="46.377" linkedscene="scene_front_22" />
+
+    </scene>
+
+    <scene name="scene_front_8" title="front 8 time" onstart="" havevrimage="true" thumburl="panos/shapan/front/8.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="0.000" vlookat="0.000" fovtype="MFOV" fov="121.432" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/front/8.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/front/8.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/front/8.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/front/8.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/front/8.tiles/vr/pano_%s.jpg" />
+        </image>
+  <hotspot name="spot1" style="new_spotd6" ath="-33.067" atv="-3.303" linkedscene="scene_left_8"  />
+  <hotspot name="spot2" style="new_spotd6" ath="32.562" atv="-4.525" linkedscene="scene_right_8"  />
+  <hotspot name="spot3" style="new_spotd6" ath="3.761" atv="-35.457" linkedscene="scene_fushi_8"  />
+
+    </scene>
+
+    <scene name="scene_front_10" title="front 10 time" onstart="" havevrimage="true" thumburl="panos/shapan/front/10.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="0.000" vlookat="0.000" fovtype="MFOV" fov="121.432" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/front/10.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/front/10.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/front/10.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/front/10.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/front/10.tiles/vr/pano_%s.jpg" />
+        </image>
+
+        <hotspot name="spot1" style="new_spotd6" ath="-33.067" atv="-3.303" linkedscene="scene_left_10"  />
+        <hotspot name="spot2" style="new_spotd6" ath="32.562" atv="-4.525" linkedscene="scene_right_10"  />
+        <hotspot name="spot3" style="new_spotd6" ath="3.761" atv="-35.457" linkedscene="scene_fushi_10"  />
+
+    </scene>
+
+    <scene name="scene_front_22" title="front 22 time" onstart="show_layer_ctrl2();" havevrimage="true" thumburl="panos/shapan/front/22.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="0.000" vlookat="0.000" fovtype="MFOV" fov="121.432" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/front/22.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/front/22.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/front/22.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/front/22.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/front/22.tiles/vr/pano_%s.jpg" />
+        </image>
+
+        <hotspot name="spot1" style="new_spotd6" ath="-33.067" atv="-3.303" linkedscene="scene_left_22"  />
+        <hotspot name="spot2" style="new_spotd6" ath="32.562" atv="-4.525" linkedscene="scene_right_22"  />
+        <hotspot name="spot3" style="new_spotd6" ath="3.761" atv="-35.457" linkedscene="scene_fushi_22"  />
+
+    </scene>
+
+    <scene name="scene_back_8" title="back 8 time" onstart="" havevrimage="true" thumburl="panos/shapan/back/8.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="3.228" vlookat="0.359" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/back/8.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/back/8.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/back/8.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/back/8.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/back/8.tiles/vr/pano_%s.jpg" />
+        </image>
+
+  <hotspot name="spot1" style="new_spotd6" ath="2.332" atv="-7.814" linkedscene="scene_fushi_8"  />
+  <hotspot name="spot2" style="new_spotd6" ath="37.191" atv="5.933" linkedscene="scene_left_8"  />
+  <hotspot name="spot3" style="new_spotd6" ath="-30.485" atv="7.130" linkedscene="scene_right_8"  />
+    </scene>
+
+    <scene name="scene_back_10" title="back 10 time" onstart="" havevrimage="true" thumburl="panos/shapan/back/10.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="3.228" vlookat="0.359" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/back/10.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/back/10.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/back/10.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/back/10.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/back/10.tiles/vr/pano_%s.jpg" />
+        </image>
+
+        <hotspot name="spot1" style="new_spotd6" ath="2.332" atv="-7.814" linkedscene="scene_fushi_10"  />
+        <hotspot name="spot2" style="new_spotd6" ath="37.191" atv="5.933" linkedscene="scene_left_10"  />
+        <hotspot name="spot3" style="new_spotd6" ath="-30.485" atv="7.130" linkedscene="scene_right_10"  />
+
+    </scene>
+
+    <scene name="scene_back_22" title="back 22 time" onstart="show_layer_ctrl2();" havevrimage="true" thumburl="panos/shapan/back/22.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="3.228" vlookat="0.359" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/back/22.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/back/22.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/back/22.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/back/22.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/back/22.tiles/vr/pano_%s.jpg" />
+        </image>
+
+        <hotspot name="spot1" style="new_spotd6" ath="2.332" atv="-7.814" linkedscene="scene_fushi_22"  />
+        <hotspot name="spot2" style="new_spotd6" ath="37.191" atv="5.933" linkedscene="scene_left_22"  />
+        <hotspot name="spot3" style="new_spotd6" ath="-30.485" atv="7.130" linkedscene="scene_right_22"  />
+
+    </scene>
+
+    <scene name="scene_left_8" title="left 8 time" onstart="" havevrimage="true" thumburl="panos/shapan/left/8.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="-7.343" vlookat="0.445" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/left/8.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/left/8.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/left/8.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/left/8.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/left/8.tiles/vr/pano_%s.jpg" />
+        </image>
+  <hotspot name="spot1" style="new_spotd6" ath="-4.620" atv="-20.638" linkedscene="scene_fushi_8"  />
+  <hotspot name="spot2" style="new_spotd6" ath="-39.060" atv="2.690" linkedscene="scene_back_8"  />
+  <hotspot name="spot3" style="new_spotd6" ath="23.862" atv="-0.761" linkedscene="scene_front_8" />
+
+    </scene>
+
+    <scene name="scene_left_10" title="left 10 time" onstart="" havevrimage="true" thumburl="panos/shapan/left/10.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="-7.343" vlookat="0.445" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/left/10.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/left/10.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/left/10.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/left/10.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/left/10.tiles/vr/pano_%s.jpg" />
+        </image>
+
+        <hotspot name="spot1" style="new_spotd6" ath="-4.620" atv="-20.638" linkedscene="scene_fushi_10"  />
+        <hotspot name="spot2" style="new_spotd6" ath="-39.060" atv="2.690" linkedscene="scene_back_10"  />
+        <hotspot name="spot3" style="new_spotd6" ath="23.862" atv="-0.761" linkedscene="scene_front_10" />
+
+    </scene>
+
+    <scene name="scene_left_22" title="left 22 time" onstart="show_layer_ctrl2();" havevrimage="true" thumburl="panos/shapan/left/22.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="-7.343" vlookat="0.445" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/left/22.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/left/22.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/left/22.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/left/22.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/left/22.tiles/vr/pano_%s.jpg" />
+        </image>
+
+        <hotspot name="spot1" style="new_spotd6" ath="-4.620" atv="-20.638" linkedscene="scene_fushi_22"  />
+        <hotspot name="spot2" style="new_spotd6" ath="-39.060" atv="2.690" linkedscene="scene_back_22"  />
+        <hotspot name="spot3" style="new_spotd6" ath="23.862" atv="-0.761" linkedscene="scene_front_22" />
+
+    </scene>
+
+    <scene name="scene_right_8" title="right 8 time" onstart="" havevrimage="true" thumburl="panos/shapan/right/8.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="3.379" vlookat="0.359" fovtype="MFOV" fov="115.320" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/right/8.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/right/8.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/right/8.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/right/8.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/right/8.tiles/vr/pano_%s.jpg" />
+        </image>
+  <hotspot name="spot1" style="new_spotd6" ath="1.257" atv="-10.450" linkedscene="scene_fushi_8"  />
+  <hotspot name="spot2" style="new_spotd6" ath="-25.995" atv="8.936" linkedscene="scene_front_8"  />
+  <hotspot name="spot3" style="new_spotd6" ath="33.217" atv="4.610" linkedscene="scene_back_8"  />
+
+    </scene>
+
+    <scene name="scene_right_10" title="right 10 time" onstart="" havevrimage="true" thumburl="panos/shapan/right/10.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="3.379" vlookat="0.359" fovtype="MFOV" fov="115.320" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/right/10.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/right/10.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/right/10.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/right/10.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/right/10.tiles/vr/pano_%s.jpg" />
+        </image>
+
+        <hotspot name="spot1" style="new_spotd6" ath="1.257" atv="-10.450" linkedscene="scene_fushi_10"  />
+        <hotspot name="spot2" style="new_spotd6" ath="-25.995" atv="8.936" linkedscene="scene_front_10"  />
+        <hotspot name="spot3" style="new_spotd6" ath="33.217" atv="4.610" linkedscene="scene_back_10"  />
+
+    </scene>
+
+    <scene name="scene_right_22" title="right 22 time" onstart="show_layer_ctrl2();" havevrimage="true" thumburl="panos/shapan/right/22.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="3.379" vlookat="0.359" fovtype="MFOV" fov="115.320" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/right/22.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/right/22.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/right/22.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/right/22.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/right/22.tiles/vr/pano_%s.jpg" />
+        </image>
+
+        <hotspot name="spot1" style="new_spotd6" ath="1.257" atv="-10.450" linkedscene="scene_fushi_22"  />
+        <hotspot name="spot2" style="new_spotd6" ath="-25.995" atv="8.936" linkedscene="scene_front_22"  />
+        <hotspot name="spot3" style="new_spotd6" ath="33.217" atv="4.610" linkedscene="scene_back_22"  />
+
+    </scene>
+
+    <scene name="scene_fushi_8" title="fushi 8 time" onstart="" havevrimage="true" thumburl="panos/shapan/fushi/8.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="-3.256" vlookat="64.958" fovtype="MFOV" fov="123.211" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/fushi/8.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/fushi/8.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/fushi/8.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/fushi/8.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/fushi/8.tiles/vr/pano_%s.jpg" />
+        </image>
+
+        <hotspot name="hotspot-marks1" style="hotspot_mark" ath="20.128" atv="70.182" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_marks" visible="true" url="%SWFPATH%/images/hot-icon/marks.svg" scale="0.45" enabled="false" />
+        <layer name="hotspot-text-marks1" align="centertop" url="textfield.swf" parent="hotspot[hotspot-marks1]" style="skin_icon_marks" html="A" />
+        <hotspot name="hotspot-marks2" style="hotspot_mark" ath="170" atv="81.166" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_marks" visible="true" url="%SWFPATH%/images/hot-icon/marks.svg" scale="0.45" enabled="false" />
+        <layer name="hotspot-text-marks2" align="centertop" url="textfield.swf" parent="hotspot[hotspot-marks2]" style="skin_icon_marks" html="B" />
+
+  <hotspot name="spot1" style="new_spotd6" ath="-93.796" atv="63.485" linkedscene="scene_left_8"  />
+  <hotspot name="spot2" style="new_spotd6" ath="97.163" atv="73.703" linkedscene="scene_right_8"  />
+  <hotspot name="spot3" style="new_spotd6" ath="-20.805" atv="68.897" linkedscene="scene_back_8"  />
+  <hotspot name="spot4" style="new_spotd6" ath="-174.072" atv="74.745" linkedscene="scene_front_8"  />
+        <hotspot name="spot5" style="new_spotd6" ath="10.079" atv="86.155" linkedscene="scene_yuanlin_8" />
+
+    </scene>
+
+    <scene name="scene_fushi_10" title="fushi 10 time" onstart="" havevrimage="true" thumburl="panos/shapan/fushi/10.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="-3.256" vlookat="64.958" fovtype="MFOV" fov="123.211" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/fushi/10.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/fushi/10.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/fushi/10.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/fushi/10.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/fushi/10.tiles/vr/pano_%s.jpg" />
+        </image>
+
+        <hotspot name="hotspot-marks1" style="hotspot_mark" ath="20.128" atv="70.182" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_marks" visible="true" url="%SWFPATH%/images/hot-icon/marks.svg" scale="0.45" enabled="false" />
+        <layer name="hotspot-text-marks1" align="centertop" url="textfield.swf" parent="hotspot[hotspot-marks1]" style="skin_icon_marks" html="A" />
+        <hotspot name="hotspot-marks2" style="hotspot_mark" ath="170" atv="81.166" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_marks" visible="true" url="%SWFPATH%/images/hot-icon/marks.svg" scale="0.45" enabled="false" />
+        <layer name="hotspot-text-marks2" align="centertop" url="textfield.swf" parent="hotspot[hotspot-marks2]" style="skin_icon_marks" html="B" />
+
+        <hotspot name="spot1" style="new_spotd6" ath="-93.796" atv="63.485" linkedscene="scene_left_10"  />
+        <hotspot name="spot2" style="new_spotd6" ath="97.163" atv="73.703" linkedscene="scene_right_10"  />
+        <hotspot name="spot3" style="new_spotd6" ath="-20.805" atv="68.897" linkedscene="scene_back_10"  />
+        <hotspot name="spot4" style="new_spotd6" ath="-174.072" atv="74.745" linkedscene="scene_front_10"  />
+        <hotspot name="spot5" style="new_spotd6" ath="10.079" atv="86.155" linkedscene="scene_yuanlin_10" />
+
+    </scene>
+
+    <scene name="scene_fushi_22" title="fushi 22 time" onstart="show_layer_ctrl2();" havevrimage="true" thumburl="panos/shapan/fushi/22.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="-3.256" vlookat="64.958" fovtype="MFOV" fov="123.211" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/shapan/fushi/22.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/shapan/fushi/22.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/shapan/fushi/22.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/shapan/fushi/22.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/shapan/fushi/22.tiles/vr/pano_%s.jpg" />
+        </image>
+
+        <hotspot name="hotspot-marks1" style="hotspot_mark" ath="20.128" atv="70.182" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_marks" visible="true" url="%SWFPATH%/images/hot-icon/marks.svg" scale="0.45" enabled="false" />
+        <layer name="hotspot-text-marks1" align="centertop" url="textfield.swf" parent="hotspot[hotspot-marks1]" style="skin_icon_marks" html="A" />
+        <hotspot name="hotspot-marks2" style="hotspot_mark" ath="170" atv="81.166" zoom="true" hotspot_ctrl="show_hide" hotspot_tips="show_marks" visible="true" url="%SWFPATH%/images/hot-icon/marks.svg" scale="0.45" enabled="false" />
+        <layer name="hotspot-text-marks2" align="centertop" url="textfield.swf" parent="hotspot[hotspot-marks2]" style="skin_icon_marks" html="B" />
+
+        <hotspot name="spot1" style="new_spotd6" ath="-93.796" atv="63.485" linkedscene="scene_left_22"  />
+        <hotspot name="spot2" style="new_spotd6" ath="97.163" atv="73.703" linkedscene="scene_right_22"  />
+        <hotspot name="spot3" style="new_spotd6" ath="-20.805" atv="68.897" linkedscene="scene_back_22"  />
+        <hotspot name="spot4" style="new_spotd6" ath="-174.072" atv="74.745" linkedscene="scene_front_22"  />
+  <hotspot name="spot5" style="new_spotd6" ath="10.079" atv="86.155" linkedscene="scene_yuanlin_22" />
+
+    </scene>
+
+    <scene name="scene_yuanlin_8" title="yuanlin-8" onstart="" havevrimage="true" thumburl="panos/yuanlin-8.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="12.73" vlookat="45.46" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/yuanlin-8.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/yuanlin-8.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/yuanlin-8.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/yuanlin-8.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/yuanlin-8.tiles/vr/pano_%s.jpg" />
+        </image>
+
+    </scene>
+
+    <scene name="scene_yuanlin_10" title="yuanlin-10" onstart="" havevrimage="true" thumburl="panos/yuanlin-10.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="12.73" vlookat="45.46" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/yuanlin-10.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/yuanlin-10.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/yuanlin-10.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/yuanlin-10.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/yuanlin-10.tiles/vr/pano_%s.jpg" />
+        </image>
+
+    </scene>
+
+    <scene name="scene_yuanlin_22" title="yuanlin-22" onstart="" havevrimage="true" thumburl="panos/yuanlin-22.tiles/thumb.jpg" lat="" lng="" heading="">
+
+        <view hlookat="12.73" vlookat="45.46" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+        <preview url="panos/yuanlin-22.tiles/preview.jpg" />
+
+        <image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+            <level tiledimagewidth="2624" tiledimageheight="2624">
+                <cube url="panos/yuanlin-22.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="1280" tiledimageheight="1280">
+                <cube url="panos/yuanlin-22.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+            </level>
+            <level tiledimagewidth="640" tiledimageheight="640">
+                <cube url="panos/yuanlin-22.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+            </level>
+        </image>
+
+        <image if="webvr.isenabled">
+            <cube url="panos/yuanlin-22.tiles/vr/pano_%s.jpg" />
+        </image>
+
+    </scene>
+
+    <layer layer_tips="show_this2" style="layer_ctrl2" name="btn_ctrl_8" html="8AM" onclick="js(krLoadScene(8)); toggle_layer_ctrl(ctrl_8);" y="200" />
+    <layer layer_tips="show_this2" style="layer_ctrl2" name="btn_ctrl_10" html="10AM" onclick="js(krLoadScene(10)); toggle_layer_ctrl(ctrl_10);" y="150" />
+    <layer layer_tips="show_this2" style="layer_ctrl2" name="btn_ctrl_22" html="22PM" onclick="js(krLoadScene(22)); toggle_layer_ctrl(ctrl_22);" y="100" backgroundcolor="0xff8800" cus_color="custom_color" />
+
+
+
+    <!--场景过渡效果-->
+    <blendmodes name="crossblending" blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)" />
+    <blendmodes name="elliptic + zoom" description="椭圆缩放" blend="OPENBLEND(1.0, -0.5, 0.3, 0.8, ease-in-out)" />
+
+</krpano>
