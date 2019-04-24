@@ -5,7 +5,7 @@
 
 ### DEMO 演示及其它demo演示(用微信扫描浏览)
 <p>
-<img src="http://webcase.51hitech.com/source/assets/images/smart-realty.png" style="display:block;max-width:80%">
+<img src="http://webcase.51hitech.com/source/assets/images/smart-realty.png" style="display:block;max-width:50%">
 </p>
 
 ```Text
